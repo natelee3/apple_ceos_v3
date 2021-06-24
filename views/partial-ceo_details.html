@@ -1,0 +1,10 @@
+<h1>${theCeo.name}</h1>
+<p>${theCeo.name} was CEO of Apple in ${theCeo.first_year_active}.</p>
+
+<form action="./delete" method="POST">
+    <input type="hidden" name="id" value="${theCeo.id}"/>
+    <input type="hidden" name="ceo_name" value="${theCeo.name}"/>
+    <input type="hidden" name="ceo_slug" value="${theCeo.slug}"/>
+    <input type="hidden" name="ceo_year" value="${theCeo.first_year_active}"/>
+    <button type="submit">Remove ${theCeo.name} from Database</button>
+</form>
