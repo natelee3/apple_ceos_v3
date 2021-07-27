@@ -24,7 +24,7 @@ class ExecutiveModel {
 
     static async getBySlug(slug) {
         try {
-            const response = await db.one(
+            const response = await db.any(
                 `SELECT * FROM ceos
                 WHERE slug = '${slug}';`
             )

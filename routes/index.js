@@ -9,27 +9,11 @@ router.get('/:slug?', async (req, res) => {
     if (!!req.params.slug) {
         const {slug} = req.params;
         const theCeo = await ExecutivesModel.getBySlug(slug);
-        console.log(theCeo.name)
-        res.render('template', {
-            locals: {
-                title: 'CEO Details',
-                theCeo
-            },
-            partials: {
-                body: 'partial-ceo_details'
-            }
-        })
+        res.json(theCeo).status(200)
+       
     } else {
         const ceoData = await ExecutivesModel.getAllExecutiveData();
-        res.render('template', {
-            locals: {
-                title: 'Apple CEOs',
-                data: ceoData
-            },
-            partials: {
-                body: 'partial-index'
-            }
-        })
+        res.json(ceoData).status(200)
     }
     
 })
@@ -44,7 +28,7 @@ router.post('/', async (req, res) => {
     const newExecutive = new ExecutivesModel(null, ceo_name, ceo_slug, ceo_year);
     const response = await newExecutive.addEntry();
 
-    res.sendStatus(200);
+    res.redirect('/');
 })
 
 router.post('/delete', async (req, res) => {
@@ -52,7 +36,7 @@ router.post('/delete', async (req, res) => {
     const executiveToDelete = new ExecutivesModel(id, ceo_name, ceo_slug, ceo_year);
     const response = await executiveToDelete.deleteEntry();
 
-    res.sendStatus(200);
+    res.redirect('/');
 })
 
 module.exports = router;
